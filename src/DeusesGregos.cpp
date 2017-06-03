@@ -11,8 +11,12 @@ bool DeusesGregos::isOpen() {
 void DeusesGregos::insertData(Deuses deus) {
     if(isOpen()) {
         _arquivo.write((char *) &deus, sizeof(Deuses));
-        _arquivo.seekg(0, ios_base::beg);
-
+        try {
+            _arquivo.seekg(0, ios_base::beg);
+        } catch(exception ex){
+            cout << ex << endl;
+            exit(EXIT_FAILURE); 
+        }
     }
 }
 
@@ -27,5 +31,6 @@ void DeusesGregos::getData() {
             cout << "Biografia: " << deus.Biografia << endl;
         }
         cout << endl;
+        // cout << "----" << endl << _arquivo.fail() << endl << "----" << endl;
     }
 } //http://www.eecs.umich.edu/courses/eecs380/HANDOUTS/cppBinaryFileIO-2.html
