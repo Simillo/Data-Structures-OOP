@@ -1,7 +1,7 @@
 #include "DeusesGregos.h"
 
 DeusesGregos::DeusesGregos(const char *nome) {
-    _arquivo.open(nome, ios_base::in|ios_base::out|ios_base::binary|ios_base::app);
+    _arquivo.open(nome, ios_base::in | ios_base::out | ios_base::ate | ios_base::binary);
 }
 
 bool DeusesGregos::isOpen() {
@@ -11,6 +11,8 @@ bool DeusesGregos::isOpen() {
 void DeusesGregos::insertData(Deuses deus) {
     if(isOpen()) {
         _arquivo.write((char *) &deus, sizeof(Deuses));
+        _arquivo.seekg(0, ios_base::beg);
+
     }
 }
 
@@ -24,5 +26,6 @@ void DeusesGregos::getData() {
             cout << "Dominio: " << deus.Dominio << endl;
             cout << "Biografia: " << deus.Biografia << endl;
         }
+        cout << endl;
     }
-}
+} //http://www.eecs.umich.edu/courses/eecs380/HANDOUTS/cppBinaryFileIO-2.html

@@ -1,7 +1,7 @@
 #include "DeusesGregos.h"
 
 int main(int argc, char *argv[]) {
-    const char *nome = "deuses.dat";
+    const char *nome = "deuses.bin";
     DeusesGregos deus(nome);
 
     bool flag = true;
@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
         cout << endl
              << "Digite (i) para inserer algum deus ou (p) para imprimir todos os deuses inseridos ou (q) para sair."
              << endl
-             << "---------------------------------------------------------------------------------"
+             << "---------------------------------------------------------------------------------------------------"
              << endl << endl;
         cin >> operacao;
 
