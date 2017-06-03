@@ -19,9 +19,11 @@ struct Deuses {
 class DeusesGregos {
     private:
         fstream _arquivo;
-        Deuses _deus;
     public:
-        DeusesGregos(char *msg);
+        DeusesGregos(const char *nome);
+        bool isOpen();
+        void insertData(Deuses deus);
+        void getData();
 };
 
 #endif
