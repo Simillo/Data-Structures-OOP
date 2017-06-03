@@ -3,7 +3,7 @@
 ##### Estrutura do objeto
 #
 ```cpp
-struct objeto { 
+struct Deuses { 
     int id; 
     char nome[50]; 
     char dominio[50]; // ex: deus da chuva
