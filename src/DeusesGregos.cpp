@@ -20,6 +20,9 @@ void DeusesGregos::getData() {
         _arquivo.seekg(0, ios_base::beg);
         while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
             cout << "Id: " << deus.Id << endl;
+            cout << "Nome: " << deus.Nome << endl;
+            cout << "Dominio: " << deus.Dominio << endl;
+            cout << "Biografia: " << deus.Biografia << endl;
         }
     }
 }
