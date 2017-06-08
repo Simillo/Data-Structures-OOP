@@ -11,18 +11,14 @@ bool DeusesGregos::isOpen() {
 void DeusesGregos::insertData(Deuses deus) {
     if(isOpen()) {
         _arquivo.write((char *) &deus, sizeof(Deuses));
-        try {
-            _arquivo.seekg(0, ios_base::beg);
-        } catch(exception ex){
-            cout << ex << endl;
-            exit(EXIT_FAILURE); 
-        }
+            // _arquivo.seekg(0, ios_base::beg);
     }
 }
 
 void DeusesGregos::getData() {
     if(isOpen()) {
         Deuses deus;
+        _arquivo.clear();
         _arquivo.seekg(0, ios_base::beg);
         while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
             cout << "Id: " << deus.Id << endl;
