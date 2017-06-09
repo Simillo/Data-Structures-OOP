@@ -19,11 +19,17 @@ struct Deuses {
 class DeusesGregos {
     private:
         fstream _arquivo;
+        inline bool _isOpen();
+        int _lastId;
     public:
         DeusesGregos(const char *nome);
-        bool isOpen();
         void insertData(Deuses deus);
         void getData();
+        Deuses* getData(int id);
+        Deuses* getData(char nome);
+        int getLast();
+        void checkIfIsOpen();
+        void deleteById(int id);
 };
 
 #endif
