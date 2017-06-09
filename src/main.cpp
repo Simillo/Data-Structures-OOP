@@ -45,25 +45,10 @@ int main(int argc, char *argv[]) {
                 deus.deleteById(id);
                 break;
             case 's':
-                char search;
-                cout << "Digite (I) para procurar pelo Id;"
-                     << endl
-                     << "Digite (N) para procurar pelo Nome."
-                     << endl;
+                int search;
+                cout << "Digite o ID a ser procurado: ";
                 cin >> search;
-                
-                switch(search) {
-                    case 'I':
-                        char searchName[50];
-                        cin.ignore();
-                        cin.getline(searchName, 50);
-                        Deuses *deusAux;
-                        deusAux = deus.getData(searchName);
-                        cout << deusAux->Nome;
-                        break;     
-                    default:
-                        break;                       
-                }
+                deus.getData(search);
                 break;
             case 'v':
                 deus.checkIfIsOpen();
