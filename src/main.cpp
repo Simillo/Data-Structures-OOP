@@ -10,8 +10,8 @@
 #include "DeusesGregos.h"
 
 int main(int argc, char *argv[]) {
-    const char *NOME = argv[1] ? argv[1] : "deuses.bin"; 
-    const char *NOMEAUX = argv[2] ? argv[2] : "deusesAux.bin"; 
+    const char *NOME = argc == 2 ? argv[1] : "deuses.bin"; 
+    const char *NOMEAUX = argc == 3 ? argv[2] : "deusesAux.bin";
     DeusesGregos deus(NOME, NOMEAUX);
 
     bool flag = true;
