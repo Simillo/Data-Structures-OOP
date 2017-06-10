@@ -31,9 +31,9 @@ class DeusesGregos {
         const char* _fileName;
         const char* _fileNameAux;
         inline bool _isOpen();
+        int _quantity;
         int _firstId;
         int _lastId;
-        int _quantity;
     public:
         DeusesGregos(const char *NOME, const char *NOMEAUX);
         void insertData(Deuses deus);

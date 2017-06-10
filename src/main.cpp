@@ -12,7 +12,6 @@
 int main(int argc, char *argv[]) {
     const char *NOME = argc >= 2 ? argv[1] : "deuses.bin";
     const char *NOMEAUX = argc == 3 ? argv[2] : "deusesAux.bin";
-    cout << NOME << " " << argc << endl;
     DeusesGregos deus(NOME, NOMEAUX);
 
     bool flag = true;
@@ -23,6 +22,8 @@ int main(int argc, char *argv[]) {
              << "Digite (i) para inserir algum deus;"
              << endl
              << "Digite (p) para imprimir todos os deuses inseridos;"
+             << endl
+             << "Digite (d) para deletar um deus pelo ID;"
              << endl
              << "Digite (s) para procurar um deus;"
              << endl
@@ -53,7 +54,7 @@ int main(int argc, char *argv[]) {
                 break;
             case 'd':
                 int id;
-                cout << "Digite o ID a ser deletado: " << endl;
+                cout << "Digite o ID a ser deletado: ";
                 cin >> id;
                 deus.deleteById(id);
                 break;

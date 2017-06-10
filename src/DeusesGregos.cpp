@@ -19,8 +19,9 @@ DeusesGregos::DeusesGregos(const char *NOME, const char *NOMEAUX) {
     _arquivo.open(NOME, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
     _fileName = NOME;
     _fileNameAux = NOMEAUX;
-    _lastId = getLast();
     _quantity = getQuantity();
+    _firstId = getFirst();
+    _lastId = getLast();
 }
 
 /**
@@ -43,8 +44,7 @@ void DeusesGregos::insertData(Deuses deus) {
         Deuses deusAux;
         
         int counter = 0;
-        bool inserted = false;
-        
+        bool inserted = false;        
         _arquivo.clear();
         _arquivo.seekg(0, _arquivo.beg);
 
@@ -52,6 +52,12 @@ void DeusesGregos::insertData(Deuses deus) {
         arquivoAux.seekg(0, arquivoAux.beg);
         
         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+            if(deusAux.Id == deus.Id) {
+                cout << endl << "Deus com o ID " << deus.Id << " ja existe." << endl;
+                arquivoAux.close();
+                remove(_fileNameAux);
+                return;
+            }
 			if(deusAux.Id < deus.Id || inserted) {
                 ++counter;
             } else {
@@ -137,7 +143,7 @@ void DeusesGregos::getData(int id) {
 */
 
 int DeusesGregos::getFirst() {
-    if(_isOpen()) {
+    if(_isOpen() && _quantity) {
         _arquivo.seekg(0, _arquivo.beg);
         Deuses deus;
         _arquivo.read((char *) &deus, sizeof(Deuses));
@@ -152,7 +158,7 @@ int DeusesGregos::getFirst() {
 */
 
 int DeusesGregos::getLast() {
-    if(_isOpen()) {
+    if(_isOpen() && _quantity) {
         _arquivo.seekg(-sizeof(Deuses), _arquivo.end);
         Deuses deus;
         _arquivo.read((char *) &deus, sizeof(Deuses));
