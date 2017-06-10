@@ -16,17 +16,40 @@ struct Deuses {
     char Biografia[200];
 };
 
+class Node {
+	friend class List;
+	private:
+		Deuses _data;
+		Node* _next;
+	public:
+		Node(Deuses data);
+        Deuses getData();
+        Node* getNext();
+};
+
+class List {
+	private:
+		Node* _first;
+		Node* _last;
+		int _size;
+	public:
+		List();
+		void insert(Deuses data);
+        Node* getFirst();
+};
+
 class DeusesGregos {
     private:
         fstream _arquivo;
         inline bool _isOpen();
+        int _firstId;
         int _lastId;
     public:
         DeusesGregos(const char *nome);
         void insertData(Deuses deus);
         void getData();
-        Deuses* getData(int id);
-        Deuses* getData(char nome);
+        void getData(int id);
+        int getFirst();
         int getLast();
         void checkIfIsOpen();
         void deleteById(int id);
