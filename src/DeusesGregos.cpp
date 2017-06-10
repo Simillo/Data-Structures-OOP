@@ -20,6 +20,7 @@ DeusesGregos::DeusesGregos(const char *NOME, const char *NOMEAUX) {
     _fileName = NOME;
     _fileNameAux = NOMEAUX;
     _lastId = getLast();
+    _quantity = getQuantity();
 }
 
 /**
@@ -77,6 +78,7 @@ void DeusesGregos::insertData(Deuses deus) {
         }
         arquivoAux.close();
         remove(_fileNameAux);
+        ++_quantity;
         _lastId = getLast();
     }
 }
@@ -175,4 +177,22 @@ void DeusesGregos::checkIfIsOpen() {
 
 void DeusesGregos::deleteById(int id) {
     cout << id << endl;
+}
+
+/**
+ * Método para pegar a quantidade de deuses no arquivo.
+ * @returns Número inteiro referente a quantidade.
+*/
+
+int DeusesGregos::getQuantity() {
+    int counter = 0;
+    if(_isOpen()) {
+         Deuses deus;
+        _arquivo.clear();
+        _arquivo.seekg(0, _arquivo.beg);
+        while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
+            ++counter;
+        }
+    }
+    return counter;
 }

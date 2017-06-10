@@ -33,6 +33,7 @@ class DeusesGregos {
         inline bool _isOpen();
         int _firstId;
         int _lastId;
+        int _quantity;
     public:
         DeusesGregos(const char *NOME, const char *NOMEAUX);
         void insertData(Deuses deus);
@@ -42,6 +43,7 @@ class DeusesGregos {
         int getLast();
         void checkIfIsOpen();
         void deleteById(int id);
+        int getQuantity();
 };
 
 #endif
