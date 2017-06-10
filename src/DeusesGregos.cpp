@@ -9,7 +9,6 @@
 
 #include "DeusesGregos.h"
 
-
 /**
  * Construtor da classe 'DeusesGregos'
  * @param NOME Nome do arquivo principal que será armazenado as ações.
@@ -52,15 +51,14 @@ void DeusesGregos::insertData(Deuses deus) {
         arquivoAux.seekg(0, arquivoAux.beg);
         
         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-			if(deusAux.Id < deus.Id || inserted){
-                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
+			if(deusAux.Id < deus.Id || inserted) {
                 ++counter;
             } else {
                 arquivoAux.write((char *) &deus, sizeof(Deuses));
-                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
                 counter += 2;
                 inserted = true;
             }
+            arquivoAux.write((char *) &deusAux, sizeof(Deuses));
 		}
         if(counter == 0 || !inserted) {
             _arquivo.clear();
