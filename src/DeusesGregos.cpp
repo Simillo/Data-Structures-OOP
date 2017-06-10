@@ -1,15 +1,41 @@
+/**
+ * GCC - 216, Estrutura de Dados
+ * DeusesGregos.cpp
+ * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
+ * Tema: Deuses Gregos.
+ * @author Simillo Nakai
+ * @version 1.0 10/06/2017
+*/
+
 #include "DeusesGregos.h"
 
-DeusesGregos::DeusesGregos(const char *nome, const char *nomeAux) {
-    _arquivo.open(nome, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
-    _fileName = nome;
-    _fileNameAux = nomeAux;
+
+/**
+ * Construtor da classe 'DeusesGregos'
+ * @param NOME Nome do arquivo principal que será armazenado as ações.
+ * @param NOMEAUX Nome do arquivo auxiliar para auxiliar nas ações. 
+*/
+
+DeusesGregos::DeusesGregos(const char *NOME, const char *NOMEAUX) {
+    _arquivo.open(NOME, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+    _fileName = NOME;
+    _fileNameAux = NOMEAUX;
     _lastId = getLast();
 }
+
+/**
+ * Verifica se o arquivo principal está aberto.
+ * @returns Valor boolean;
+*/
 
 inline bool DeusesGregos::_isOpen() {
     return _arquivo.is_open();
 }
+
+/**
+ * Insere um objeto no arquivo principal. 
+ * @param deus Objeto do tipo 'Deuses' que é feito pelo usuário.
+*/
 
 void DeusesGregos::insertData(Deuses deus) {
     if(_isOpen()) {
@@ -57,6 +83,10 @@ void DeusesGregos::insertData(Deuses deus) {
     }
 }
 
+/**
+ * Imprime todos os dados inseridos no arquivo.
+*/
+
 void DeusesGregos::getData() {
     if(_isOpen()) {
         Deuses deus;
@@ -73,6 +103,11 @@ void DeusesGregos::getData() {
         cout << endl;
     }
 }
+
+/**
+ * Imprime um deus que será procurado.
+ * @param id Valor do id do deus que será procurado.
+*/
 
 void DeusesGregos::getData(int id) {
     if(_isOpen()) {
@@ -96,6 +131,11 @@ void DeusesGregos::getData(int id) {
     }
 }
 
+/**
+ * Pega o id do primeiro deus.
+ * @returns Valor do id do primeiro deus, -1 se não existir nenhum deus.
+*/
+
 int DeusesGregos::getFirst() {
     if(_isOpen()) {
         _arquivo.seekg(0, _arquivo.beg);
@@ -105,6 +145,11 @@ int DeusesGregos::getFirst() {
     }
     return -1;
 }
+
+/**
+ * Pega o id do último deus.
+ * @returns Valor do id do último deus, -1 se não existir nenhum deus. 
+*/
 
 int DeusesGregos::getLast() {
     if(_isOpen()) {
@@ -116,9 +161,19 @@ int DeusesGregos::getLast() {
     return -1;
 }
 
+/**
+ * Imprime para o usuário se o arquivo está aberto ou não.
+*/
+
 void DeusesGregos::checkIfIsOpen() {
     cout << (_isOpen() ? "Sim" : "Nao") << endl;
 }
+
+/**
+ * Delete um deus pelo ID.
+ * @param id Id que o usuário escolher para deletar.
+ * @returns Valor boolean se conseguiu deletar ou não.
+*/
 
 void DeusesGregos::deleteById(int id) {
     cout << id << endl;

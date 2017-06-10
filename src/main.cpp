@@ -1,11 +1,18 @@
+/**
+ * GCC - 216, Estrutura de Dados
+ * main.cpp
+ * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
+ * Tema: Deuses Gregos.
+ * @author Simillo Nakai
+ * @version 1.0 10/06/2017
+*/
+
 #include "DeusesGregos.h"
 
 int main(int argc, char *argv[]) {
-    cout << argc << endl;
-    cout << argv[0] << endl;
-    const char *nome = argv[1] ? argv[1] : "deuses.bin"; 
-    const char *nomeAux = argv[2] ? argv[2] : "deusesAux.bin"; 
-    DeusesGregos deus(nome, nomeAux);
+    const char *NOME = argv[1] ? argv[1] : "deuses.bin"; 
+    const char *NOMEAUX = argv[2] ? argv[2] : "deusesAux.bin"; 
+    DeusesGregos deus(NOME, NOMEAUX);
 
     bool flag = true;
 

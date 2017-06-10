@@ -1,3 +1,12 @@
+/**
+ * GCC - 216, Estrutura de Dados
+ * DeusesGregos.h
+ * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
+ * Tema: Deuses Gregos.
+ * @author Simillo Nakai
+ * @version 1.0 10/06/2017
+*/
+
 #ifndef DEUSES_GREGOS_H
 #define DEUSES_GREGOS_H
 
@@ -25,7 +34,7 @@ class DeusesGregos {
         int _firstId;
         int _lastId;
     public:
-        DeusesGregos(const char *nome);
+        DeusesGregos(const char *NOME, const char *NOMEAUX);
         void insertData(Deuses deus);
         void getData();
         void getData(int id);
