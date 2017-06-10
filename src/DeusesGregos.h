@@ -22,6 +22,7 @@ class DeusesGregos {
         const char* _fileName;
         const char* _fileNameAux;
         inline bool _isOpen();
+        int _firstId;
         int _lastId;
     public:
         DeusesGregos(const char *nome);
