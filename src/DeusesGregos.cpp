@@ -1,43 +1,8 @@
 #include "DeusesGregos.h"
 
-
-Node::Node(Deuses data) {
-	_data = data;
-	_next = NULL;
-}
-
-Deuses Node::getData() {
-    return this->_data;
-}
-
-Node* Node::getNext() {
-    return this->_next;
-}
-
-List::List() {
-	_first = NULL;
-	_last = NULL;
-	_size = 0;
-}
-
-void List::insert(Deuses data) {
-	Node *nodeAux = new Node(data);
-	if(_first == NULL) {
-		_first = nodeAux;
-		_last = nodeAux;
-	} else {
-		_last->_next = nodeAux;
-		_last = nodeAux;
-	}
-	++_size;
-}
-
-Node* List::getFirst() {
-    return this->_first;
-}
-
 DeusesGregos::DeusesGregos(const char *nome) {
     _arquivo.open(nome, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+    _fileName = nome;
     _firstId = getFirst();
     _lastId = getLast();
 }
@@ -48,27 +13,47 @@ inline bool DeusesGregos::_isOpen() {
 
 void DeusesGregos::insertData(Deuses deus) {
     if(_isOpen()) {
-        fstream arquivoAux("deusesAux.bin", ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+        fstream arquivoAux("deusesAux.bin", ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
         Deuses deusAux;
+        
+        int counter = 0;
+        bool inserted = false;
+        
         _arquivo.clear();
         _arquivo.seekg(0, _arquivo.beg);
 
-        List listAux;
-        int counter = 0;
+        arquivoAux.clear();
+        arquivoAux.seekg(0, arquivoAux.beg);
+        
         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-			if(deusAux.Id < deus.Id){
-                listAux.insert(deusAux);
+			if(deusAux.Id < deus.Id || inserted){
+                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
                 ++counter;
             } else {
-                break;
+                arquivoAux.write((char *) &deus, sizeof(Deuses));
+                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
+                counter += 2;
+                inserted = true;
             }
 		}
-        Node *nodeAux = listAux.getFirst();
-        while(nodeAux != NULL) {
-            Deuses nodeData = nodeAux->getData();
-            arquivoAux.write((char *) &nodeData, sizeof(Deuses));
-            nodeAux = nodeAux->getNext();
+        if(counter == 0 || !inserted) {
+            _arquivo.clear();
+            _arquivo.seekg(0, _arquivo.beg);
+            _arquivo.write((char *) &deus, sizeof(Deuses));
+        } else {
+            _arquivo.close();
+            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+            arquivoAux.clear();
+            arquivoAux.seekg(0, arquivoAux.beg);
+            while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
+                _arquivo.write((char *) &deusAux, sizeof(Deuses));
+            }
+            _arquivo.close();
+            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
         }
+
+        arquivoAux.close();
+        remove("deusesAux.bin");
     }
 }
 

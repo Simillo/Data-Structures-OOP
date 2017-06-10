@@ -16,31 +16,10 @@ struct Deuses {
     char Biografia[200];
 };
 
-class Node {
-	friend class List;
-	private:
-		Deuses _data;
-		Node* _next;
-	public:
-		Node(Deuses data);
-        Deuses getData();
-        Node* getNext();
-};
-
-class List {
-	private:
-		Node* _first;
-		Node* _last;
-		int _size;
-	public:
-		List();
-		void insert(Deuses data);
-        Node* getFirst();
-};
-
 class DeusesGregos {
     private:
         fstream _arquivo;
+        const char* _fileName;
         inline bool _isOpen();
         int _firstId;
         int _lastId;
