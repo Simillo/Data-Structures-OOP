@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
              << endl
              << "Digite (p) para imprimir todos os deuses inseridos;"
              << endl
-             << "Digite (d) para deletar um deus pelo ID;"
+             << "Digite (d) para deletar um deus;"
              << endl
              << "Digite (s) para procurar um deus;"
              << endl
