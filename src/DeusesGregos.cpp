@@ -1,9 +1,9 @@
 #include "DeusesGregos.h"
 
-DeusesGregos::DeusesGregos(const char *nome) {
+DeusesGregos::DeusesGregos(const char *nome, const char *nomeAux) {
     _arquivo.open(nome, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
     _fileName = nome;
-    _firstId = getFirst();
+    _fileNameAux = nomeAux;
     _lastId = getLast();
 }
 
@@ -13,7 +13,7 @@ inline bool DeusesGregos::_isOpen() {
 
 void DeusesGregos::insertData(Deuses deus) {
     if(_isOpen()) {
-        fstream arquivoAux("deusesAux.bin", ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+        fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
         Deuses deusAux;
         
         int counter = 0;
@@ -51,9 +51,9 @@ void DeusesGregos::insertData(Deuses deus) {
             _arquivo.close();
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
         }
-
         arquivoAux.close();
-        remove("deusesAux.bin");
+        remove(_fileNameAux);
+        _lastId = getLast();
     }
 }
 

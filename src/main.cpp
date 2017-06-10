@@ -4,9 +4,8 @@ int main(int argc, char *argv[]) {
     cout << argc << endl;
     cout << argv[0] << endl;
     const char *nome = argv[1] ? argv[1] : "deuses.bin"; 
-    cout << nome << endl;
-    // const char *nome = "deuses.bin";
-    DeusesGregos deus(nome);
+    const char *nomeAux = argv[2] ? argv[2] : "deusesAux.bin"; 
+    DeusesGregos deus(nome, nomeAux);
 
     bool flag = true;
 
