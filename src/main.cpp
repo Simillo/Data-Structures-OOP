@@ -3,7 +3,6 @@
  * main.cpp
  * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
  * Tema: Deuses Gregos.
- * @author Simillo Nakai
  * @version 1.0 10/06/2017
 */
 
@@ -56,7 +55,7 @@ int main(int argc, char *argv[]) {
                 int id;
                 cout << "Digite o ID a ser deletado: ";
                 cin >> id;
-                deus.deleteById(id);
+                cout << "O registro foi deletado? " << deus.deleteById(id) << endl;
                 break;
             case 's':
                 int search;

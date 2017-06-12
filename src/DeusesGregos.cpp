@@ -3,7 +3,6 @@
  * DeusesGregos.cpp
  * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
  * Tema: Deuses Gregos.
- * @author Simillo Nakai
  * @version 1.0 10/06/2017
 */
 
@@ -181,8 +180,39 @@ void DeusesGregos::checkIfIsOpen() {
  * @returns Valor boolean se conseguiu deletar ou não.
 */
 
-void DeusesGregos::deleteById(int id) {
-    cout << id << endl;
+bool DeusesGregos::deleteById(int id) {
+    if(_isOpen()) {
+        Deuses deus;
+        Deuses deuses[getQuantity() - 1];
+        int qntd = 0;
+        bool existe = false;
+
+        _arquivo.clear();
+        _arquivo.seekg(0, _arquivo.beg);
+        while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
+            if(deus.Id != id){
+                deuses[qntd] = deus;
+                qntd++;
+            }
+            else existe = true;
+        }
+        _arquivo.close();
+        remove(_fileName);
+        _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+
+        for(int i = 0; i < qntd; i++) {
+            _arquivo.write((char *) &deuses[i], sizeof(Deuses));
+        }
+        if(id == _firstId)
+            _firstId = deuses[0].Id;
+        if(id == _lastId)
+            _lastId = deuses[qntd - 1].Id;
+
+        _quantity = qntd - 1;
+        if(existe)
+            return true;
+    }
+    return false;
 }
 
 /**

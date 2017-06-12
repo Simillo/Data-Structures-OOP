@@ -3,7 +3,6 @@
  * DeusesGregos.h
  * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
  * Tema: Deuses Gregos.
- * @author Simillo Nakai
  * @version 1.0 10/06/2017
 */
 
@@ -42,7 +41,7 @@ class DeusesGregos {
         int getFirst();
         int getLast();
         void checkIfIsOpen();
-        void deleteById(int id);
+        bool deleteById(int id);
         int getQuantity();
 };
 
