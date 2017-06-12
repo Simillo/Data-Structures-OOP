@@ -1,8 +1,9 @@
 /**
  * GCC - 216, Estrutura de Dados
  * DeusesGregos.h
- * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
+ * Propósito: Header de declaração da classe 'DeusesGregos' e o struct 'Deuses'.
  * Tema: Deuses Gregos.
+ * Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
  * @author Simillo Nakai
  * @version 1.0 10/06/2017
 */

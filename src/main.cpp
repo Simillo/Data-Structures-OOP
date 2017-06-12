@@ -1,8 +1,9 @@
 /**
  * GCC - 216, Estrutura de Dados
  * main.cpp
- * Propósito: Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
+ * Propósito: Arquivo principal, acontece a interação com o usuário.
  * Tema: Deuses Gregos.
+ * Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
  * @author Simillo Nakai
  * @version 1.0 10/06/2017
 */
