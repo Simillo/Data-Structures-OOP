@@ -183,7 +183,41 @@ void DeusesGregos::checkIfIsOpen() {
 */
 
 void DeusesGregos::deleteById(int id) {
-    cout << id << endl;
+    if(_isOpen()) {
+        fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+        Deuses deusAux;
+
+        bool exists = false;
+
+        _arquivo.clear();
+        _arquivo.seekg(0, _arquivo.beg);
+
+        arquivoAux.clear();
+        arquivoAux.seekg(0, arquivoAux.beg);
+
+         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+            if(deusAux.Id != id) {
+                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
+            } else
+                exists = true;
+		}
+        if(exists) {
+            _arquivo.close();
+            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+            arquivoAux.clear();
+            arquivoAux.seekg(0, arquivoAux.beg);
+            while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
+                _arquivo.write((char *) &deusAux, sizeof(Deuses));
+            }
+            _arquivo.close();
+            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+            --_quantity;
+            _lastId = getLast();
+            cout << "Deus com o id " << id << " foi deletedo com sucesso" << endl;
+        }
+        arquivoAux.close();
+        remove(_fileNameAux);
+    }
 }
 
 /**
