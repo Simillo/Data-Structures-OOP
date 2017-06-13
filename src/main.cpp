@@ -54,10 +54,30 @@ int main(int argc, char *argv[]) {
                 deus.getData();
                 break;
             case 'd':
-                int id;
-                cout << "Digite o ID a ser deletado: ";
-                cin >> id;
-                deus.deleteById(id);
+                char opcao;
+                cout 
+                << "Digite (i) para deletar por ID" 
+                << endl 
+                << "Digite (n) para deletar por Nome"
+                << endl;
+                cin >> opcao;
+                switch(opcao) {
+                    case 'i':
+                        int id;
+                        cout << "Digite o id a ser deletado: ";
+                        cin >> id;
+                        deus.deleteDeus(id);
+                        break;
+                    case 'n':
+                        char* nome;
+                        cout << "Digite o nome a ser deletado: ";
+                        cin.ignore();
+                        cin.getline(nome, 50);
+                        deus.deleteDeus(nome);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 's':
                 int search;
