@@ -214,6 +214,8 @@ void DeusesGregos::deleteById(int id) {
             --_quantity;
             _lastId = getLast();
             cout << "Deus com o id " << id << " foi deletedo com sucesso" << endl;
+        } else {
+            cout << "Nao existe deus com o id " << id << " no arquivo." << endl;
         }
         arquivoAux.close();
         remove(_fileNameAux);
