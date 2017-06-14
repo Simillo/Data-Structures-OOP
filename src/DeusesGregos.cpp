@@ -177,9 +177,8 @@ void DeusesGregos::checkIfIsOpen() {
 }
 
 /**
- * Delete um deus pelo ID.
- * @param id Id que o usuário escolher para deletar.
- * @returns Valor boolean se conseguiu deletar ou não.
+ * Deleta um deus pelo ID.
+ * @param id Id do deus que o usuário escolheu para deletar.
 */
 
 void DeusesGregos::deleteDeus(int id) {
@@ -223,6 +222,10 @@ void DeusesGregos::deleteDeus(int id) {
     }
 }
 
+/**
+ * Deleta um deus pelo nome.
+ * @param nome[50] Nome do deus que o usuário escolheu para deletar.
+*/
 
 void DeusesGregos::deleteDeus(char nome[50]) {
     if(_isOpen()) {
