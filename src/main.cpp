@@ -69,7 +69,7 @@ int main(int argc, char *argv[]) {
                         deus.deleteDeus(id);
                         break;
                     case 'n':
-                        char* nome;
+                        char nome[50];
                         cout << "Digite o nome a ser deletado: ";
                         cin.ignore();
                         cin.getline(nome, 50);

@@ -44,7 +44,7 @@ class DeusesGregos {
         int getLast();
         void checkIfIsOpen();
         void deleteDeus(int id);
-        void deleteDeus(char* nome);
+        void deleteDeus(char nome[50]);
         int getQuantity();
 };
 

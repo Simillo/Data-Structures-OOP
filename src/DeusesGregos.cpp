@@ -196,6 +196,7 @@ void DeusesGregos::deleteDeus(int id) {
         arquivoAux.seekg(0, arquivoAux.beg);
 
          while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+            cout << "asdasd " << endl;
             if(deusAux.Id != id) {
                 arquivoAux.write((char *) &deusAux, sizeof(Deuses));
             } else
@@ -213,7 +214,7 @@ void DeusesGregos::deleteDeus(int id) {
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
             --_quantity;
             _lastId = getLast();
-            cout << "Deus com o id " << id << " foi deletedo com sucesso" << endl;
+            cout << "Deus com o id " << id << " foi deletedo com sucesso." << endl;
         } else {
             cout << "Nao existe deus com o id " << id << " no arquivo." << endl;
         }
@@ -223,7 +224,7 @@ void DeusesGregos::deleteDeus(int id) {
 }
 
 
-void DeusesGregos::deleteDeus(char* nome) {
+void DeusesGregos::deleteDeus(char nome[50]) {
     if(_isOpen()) {
         fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
         Deuses deusAux;
@@ -237,7 +238,8 @@ void DeusesGregos::deleteDeus(char* nome) {
         arquivoAux.seekg(0, arquivoAux.beg);
 
          while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-            if(strcmp(deusAux.Nome, nome) != 0) {
+            
+            if(strcmp(deusAux.Nome, nome) != 0 || exists) {
                 arquivoAux.write((char *) &deusAux, sizeof(Deuses));
             } else {
                 exists = true;
@@ -255,7 +257,7 @@ void DeusesGregos::deleteDeus(char* nome) {
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
             --_quantity;
             _lastId = getLast();
-            cout << "Deus com o nome " << nome << " foi deletedo com sucesso" << endl;
+            cout << "Deus com o nome " << nome << " foi deletedo com sucesso." << endl;
         } else {
             cout << "Nao existe deus com o nome " << nome << " no arquivo." << endl;
         }
