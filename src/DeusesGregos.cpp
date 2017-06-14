@@ -119,6 +119,38 @@ void DeusesGregos::getData() {
 void DeusesGregos::getData(int id) {
     if(_isOpen()) {
         if(id <= _lastId){
+            // int first,
+            //     middle,
+            //     last;
+            // bool found = false;
+
+            // _arquivo.clear();
+            // first = _arquivo.seekg(0, _arquivo.beg).tellg();
+            // _arquivo.clear();
+            // last = _arquivo.seekg(0, _arquivo.end).tellg();
+
+            // Deuses deusAux;
+            // while(first <= last && !found) {
+            //     middle = (first + last)/2;
+            //     _arquivo.clear();
+            //     _arquivo.seekg(middle);
+            //     _arquivo.read((char *) &deusAux, sizeof(Deuses));
+            //     if(deusAux.Id < id) {
+            //         first = middle + 1;
+            //     } else if(deusAux.Id > id) {
+            //         last = middle - 1;
+            //     } else {
+            //         found = true;
+            //     }
+            // }
+            // if(found){
+            //     cout << "achou" << endl;
+            //     cout << "Id: "        << deusAux.Id        << endl;
+            //     cout << "Nome: "      << deusAux.Nome      << endl;
+            //     cout << "Dominio: "   << deusAux.Dominio   << endl;
+            //     cout << "Biografia: " << deusAux.Biografia << endl;
+            //     cout << "---------------------------------------" << endl;
+            // }
             Deuses deus;
             _arquivo.clear();
             _arquivo.seekg(0, _arquivo.beg);
@@ -160,6 +192,7 @@ int DeusesGregos::getFirst() {
 
 int DeusesGregos::getLast() {
     if(_isOpen() && _quantity) {
+        _arquivo.clear();
         _arquivo.seekg(-sizeof(Deuses), _arquivo.end);
         Deuses deus;
         _arquivo.read((char *) &deus, sizeof(Deuses));
