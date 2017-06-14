@@ -59,7 +59,7 @@ void DeusesGregos::insertData(Deuses deus) {
                 remove(_fileNameAux);
                 return;
             }
-			if(deusAux.Id < deus.Id || inserted) {
+            if(deusAux.Id < deus.Id || inserted) {
                 ++counter;
             } else {
                 arquivoAux.write((char *) &deus, sizeof(Deuses));
@@ -67,7 +67,7 @@ void DeusesGregos::insertData(Deuses deus) {
                 inserted = true;
             }
             arquivoAux.write((char *) &deusAux, sizeof(Deuses));
-		}
+        }
         if(counter == 0 || !inserted) {
             _arquivo.clear();
             _arquivo.seekg(0, _arquivo.beg);
@@ -118,54 +118,56 @@ void DeusesGregos::getData() {
 
 void DeusesGregos::getData(int id) {
     if(_isOpen()) {
-        if(id <= _lastId){
-            // int first,
-            //     middle,
-            //     last;
-            // bool found = false;
-
-            // _arquivo.clear();
-            // first = _arquivo.seekg(0, _arquivo.beg).tellg();
-            // _arquivo.clear();
-            // last = _arquivo.seekg(0, _arquivo.end).tellg();
-
-            // Deuses deusAux;
-            // while(first <= last && !found) {
-            //     middle = (first + last)/2;
-            //     _arquivo.clear();
-            //     _arquivo.seekg(middle);
-            //     _arquivo.read((char *) &deusAux, sizeof(Deuses));
-            //     if(deusAux.Id < id) {
-            //         first = middle + 1;
-            //     } else if(deusAux.Id > id) {
-            //         last = middle - 1;
-            //     } else {
-            //         found = true;
-            //     }
-            // }
-            // if(found){
-            //     cout << "achou" << endl;
-            //     cout << "Id: "        << deusAux.Id        << endl;
-            //     cout << "Nome: "      << deusAux.Nome      << endl;
-            //     cout << "Dominio: "   << deusAux.Dominio   << endl;
-            //     cout << "Biografia: " << deusAux.Biografia << endl;
-            //     cout << "---------------------------------------" << endl;
-            // }
-            Deuses deus;
+        if(id >= _firstId && id <= _lastId){
+            const int SIZE = sizeof(Deuses);
+            int first,
+                middle,
+                last;
+            bool found = false;
+            
             _arquivo.clear();
-            _arquivo.seekg(0, _arquivo.beg);
-            cout << endl;
-            while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
-                if(deus.Id == id){
-                    cout << "Id: "        << deus.Id << endl;
-                    cout << "Nome: "      << deus.Nome << endl;
-                    cout << "Dominio: "   << deus.Dominio << endl;
-                    cout << "Biografia: " << deus.Biografia << endl;
-                    cout << "---------------------------------------" << endl << endl;
-                    return;
+            first = _arquivo.seekg(0, _arquivo.beg).tellg();
+            _arquivo.clear();
+            last = _arquivo.seekg(-SIZE, _arquivo.end).tellg();
+
+            Deuses deusAux;
+            while(first <= last && !found) {
+                middle = (first + last)/2;
+                
+                _arquivo.clear();
+                _arquivo.seekg(middle);
+                _arquivo.read((char *) &deusAux, sizeof(Deuses));
+                cout << deusAux.Nome << endl;
+                if(deusAux.Id < id) {
+                    first = middle + SIZE;
+                } else if(deusAux.Id > id) {
+                    last = middle - SIZE;
+                } else {
+                    found = true;
                 }
             }
-            cout << "Deus com o id " << id << " nao encontrado." << endl;
+            if(found){
+                cout << "Id: "        << deusAux.Id        << endl;
+                cout << "Nome: "      << deusAux.Nome      << endl;
+                cout << "Dominio: "   << deusAux.Dominio   << endl;
+                cout << "Biografia: " << deusAux.Biografia << endl;
+                cout << "---------------------------------------" << endl;
+            }
+            // Deuses deus;
+            // _arquivo.clear();
+            // _arquivo.seekg(0, _arquivo.beg);
+            // cout << endl;
+            // while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
+            //     if(deus.Id == id){
+            //         cout << "Id: "        << deus.Id << endl;
+            //         cout << "Nome: "      << deus.Nome << endl;
+            //         cout << "Dominio: "   << deus.Dominio << endl;
+            //         cout << "Biografia: " << deus.Biografia << endl;
+            //         cout << "---------------------------------------" << endl << endl;
+            //         return;
+            //     }
+            // }
+            // cout << "Deus com o id " << id << " nao encontrado." << endl;
         }
     }
 }
@@ -177,6 +179,7 @@ void DeusesGregos::getData(int id) {
 
 int DeusesGregos::getFirst() {
     if(_isOpen() && _quantity) {
+        _arquivo.clear();
         _arquivo.seekg(0, _arquivo.beg);
         Deuses deus;
         _arquivo.read((char *) &deus, sizeof(Deuses));
@@ -233,7 +236,7 @@ void DeusesGregos::deleteDeus(int id) {
                 arquivoAux.write((char *) &deusAux, sizeof(Deuses));
             } else
                 exists = true;
-		}
+        }
         if(exists) {
             _arquivo.close();
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
@@ -280,7 +283,7 @@ void DeusesGregos::deleteDeus(char nome[50]) {
             } else {
                 exists = true;
             }
-		}
+        }
         if(exists) {
             _arquivo.close();
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
