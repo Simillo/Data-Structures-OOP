@@ -43,6 +43,12 @@ int main(int argc, char *argv[]) {
                 Deuses d;
                 cout << "ID: ";
                 cin >> d.Id;
+                while(cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Por favor, digite um NUMERO referente ao ID: ";
+                    cin >> d.Id;
+                }
                 cin.ignore();
                 cout << endl << "Nome: ";
                 cin.getline(d.Nome, 50);
@@ -68,6 +74,12 @@ int main(int argc, char *argv[]) {
                         int id;
                         cout << "Digite o id a ser deletado: ";
                         cin >> id;
+                        while(cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Por favor, digite um NUMERO referente ao ID: ";
+                            cin >> id;
+                        }
                         deus.deleteDeus(id);
                         break;
                     case 'n':
@@ -85,6 +97,12 @@ int main(int argc, char *argv[]) {
                 int search;
                 cout << "Digite o ID a ser procurado: ";
                 cin >> search;
+                while(cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cout << "Por favor, digite um NUMERO referente ao ID: ";
+                    cin >> search;
+                }
                 deus.getData(search);
                 break;
             case 'v':

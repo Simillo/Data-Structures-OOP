@@ -87,6 +87,7 @@ void DeusesGregos::insertData(Deuses deus) {
         remove(_fileNameAux);
         ++_quantity;
         _lastId = getLast();
+        _firstId = getFirst();
         cout << "Deus inserido com sucesso." << endl;
     }
 }
@@ -129,11 +130,6 @@ void DeusesGregos::getData(int id) {
             Deuses deusAux;
             
             int number = positionLastEntry/SIZE + 1;
-            int positions[number];
-            
-            for(int i = 0; i < number; ++i) {
-                positions[i] = i*SIZE;
-            }
 
             int first = 0,
                 last = number,
@@ -143,7 +139,7 @@ void DeusesGregos::getData(int id) {
                 middle = (first + last)/2;
                 
                 _arquivo.clear();
-                _arquivo.seekg(positions[middle]);
+                _arquivo.seekg(middle * SIZE);
                 _arquivo.read((char *) &deusAux, sizeof(Deuses));
 
                 if(deusAux.Id < id) {
@@ -160,10 +156,12 @@ void DeusesGregos::getData(int id) {
                 cout << "Dominio: "   << deusAux.Dominio   << endl;
                 cout << "Biografia: " << deusAux.Biografia << endl;
                 cout << "---------------------------------------" << endl;
+                return;
             } else {
                 cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
             }
         }
+        cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
     }
 }
 
@@ -243,6 +241,7 @@ void DeusesGregos::deleteDeus(int id) {
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
             --_quantity;
             _lastId = getLast();
+            _firstId = getFirst();
             cout << "Deus com o id " << id << " foi deletedo com sucesso." << endl;
         } else {
             cout << "Nao existe deus com o id " << id << " no arquivo." << endl;
@@ -290,6 +289,7 @@ void DeusesGregos::deleteDeus(char nome[50]) {
             _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
             --_quantity;
             _lastId = getLast();
+            _firstId = getFirst();
             cout << "Deus com o nome " << nome << " foi deletedo com sucesso." << endl;
         } else {
             cout << "Nao existe deus com o nome " << nome << " no arquivo." << endl;
