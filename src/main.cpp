@@ -4,7 +4,7 @@
  * Propósito: Arquivo principal, acontece a interação com o usuário.
  * Tema: Deuses Gregos.
  * Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
- * @author Simillo Nakai
+ * @author Simillo Nakai, Rafael Resende, Vinicius Sezini.
  * @version 1.0 10/06/2017
 */
 
@@ -29,6 +29,8 @@ int main(int argc, char *argv[]) {
              << "Digite (s) para procurar um deus;"
              << endl
              << "Digite (v) para verificar se o arquivo esta aberto;"
+             << endl
+             << "Digite (a) para ver os dados do grupo;"
              << endl
              << "Digite (q) para sair."
              << endl
@@ -87,6 +89,9 @@ int main(int argc, char *argv[]) {
                 break;
             case 'v':
                 deus.checkIfIsOpen();
+                break;
+            case 'a':
+                deus.getGroupData();
                 break;
             case 'q':
             default:

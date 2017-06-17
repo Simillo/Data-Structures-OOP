@@ -4,7 +4,7 @@
  * Propósito: Arquivo para a definição dos metódos da classe 'DeusesGregos'.
  * Tema: Deuses Gregos.
  * Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
- * @author Simillo Nakai
+ * @author Simillo Nakai, Rafael Resende, Vinicius Sezini.
  * @version 1.0 10/06/2017
 */
 
@@ -54,7 +54,7 @@ void DeusesGregos::insertData(Deuses deus) {
         
         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
             if(deusAux.Id == deus.Id) {
-                cout << endl << "Deus com o ID " << deus.Id << " ja existe." << endl;
+                cout << endl << "Deus com o id " << deus.Id << " ja existe." << endl;
                 arquivoAux.close();
                 remove(_fileNameAux);
                 return;
@@ -87,6 +87,7 @@ void DeusesGregos::insertData(Deuses deus) {
         remove(_fileNameAux);
         ++_quantity;
         _lastId = getLast();
+        cout << "Deus inserido com sucesso." << endl;
     }
 }
 
@@ -120,28 +121,35 @@ void DeusesGregos::getData(int id) {
     if(_isOpen()) {
         if(id >= _firstId && id <= _lastId){
             const int SIZE = sizeof(Deuses);
-            int first,
-                middle,
-                last;
+            int positionLastEntry;
             bool found = false;
             
             _arquivo.clear();
-            first = _arquivo.seekg(0, _arquivo.beg).tellg();
-            _arquivo.clear();
-            last = _arquivo.seekg(-SIZE, _arquivo.end).tellg();
-
+            positionLastEntry = _arquivo.seekg(-SIZE, _arquivo.end).tellg();
             Deuses deusAux;
+            
+            int number = positionLastEntry/SIZE + 1;
+            int positions[number];
+            
+            for(int i = 0; i < number; ++i) {
+                positions[i] = i*SIZE;
+            }
+
+            int first = 0,
+                last = number,
+                middle = number/2;
+            
             while(first <= last && !found) {
                 middle = (first + last)/2;
                 
                 _arquivo.clear();
-                _arquivo.seekg(middle);
+                _arquivo.seekg(positions[middle]);
                 _arquivo.read((char *) &deusAux, sizeof(Deuses));
-                cout << deusAux.Nome << endl;
+
                 if(deusAux.Id < id) {
-                    first = middle + SIZE;
+                    first = middle + 1;
                 } else if(deusAux.Id > id) {
-                    last = middle - SIZE;
+                    last = middle - 1;
                 } else {
                     found = true;
                 }
@@ -152,22 +160,9 @@ void DeusesGregos::getData(int id) {
                 cout << "Dominio: "   << deusAux.Dominio   << endl;
                 cout << "Biografia: " << deusAux.Biografia << endl;
                 cout << "---------------------------------------" << endl;
+            } else {
+                cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
             }
-            // Deuses deus;
-            // _arquivo.clear();
-            // _arquivo.seekg(0, _arquivo.beg);
-            // cout << endl;
-            // while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
-            //     if(deus.Id == id){
-            //         cout << "Id: "        << deus.Id << endl;
-            //         cout << "Nome: "      << deus.Nome << endl;
-            //         cout << "Dominio: "   << deus.Dominio << endl;
-            //         cout << "Biografia: " << deus.Biografia << endl;
-            //         cout << "---------------------------------------" << endl << endl;
-            //         return;
-            //     }
-            // }
-            // cout << "Deus com o id " << id << " nao encontrado." << endl;
         }
     }
 }
@@ -231,7 +226,6 @@ void DeusesGregos::deleteDeus(int id) {
         arquivoAux.seekg(0, arquivoAux.beg);
 
          while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-            cout << "asdasd " << endl;
             if(deusAux.Id != id) {
                 arquivoAux.write((char *) &deusAux, sizeof(Deuses));
             } else
@@ -321,4 +315,20 @@ int DeusesGregos::getQuantity() {
         }
     }
     return counter;
+}
+
+/**
+ * Método para imprimir os dados do grupo.
+*/
+
+void DeusesGregos::getGroupData() {
+    cout 
+    << "*******************************************************" << endl
+    << "*      Trabalho de Estrutura de Dados - GCC 216       *" << endl
+    << "*      Tema: Deuses Gregos                            *" << endl
+    << "*      Integrantes: Simillo Nakai                     *" << endl
+    << "*                   Rafael Resende                    *" << endl
+    << "*                   Vinicius Sezini                   *" << endl
+    << "*Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
+    << "*******************************************************" << endl;
 }

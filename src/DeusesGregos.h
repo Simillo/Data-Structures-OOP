@@ -4,7 +4,7 @@
  * Propósito: Header de declaração da classe 'DeusesGregos' e o struct 'Deuses'.
  * Tema: Deuses Gregos.
  * Trabalho de gerenciamento de dados usando arquivo binário e orientação a objetos.
- * @author Simillo Nakai
+ * @author Simillo Nakai, Rafael Resende, Vinicius Sezini.
  * @version 1.0 10/06/2017
 */
 
@@ -46,6 +46,7 @@ class DeusesGregos {
         void deleteDeus(int id);
         void deleteDeus(char nome[50]);
         int getQuantity();
+        void getGroupData();
 };
 
 #endif
