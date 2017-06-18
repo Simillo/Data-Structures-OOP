@@ -18,6 +18,21 @@ Nome: Pers‚fone
 Dominio: Deusa das ervas, flores, frutos e perfumes.
 Biografia: a deusa da agricultura e esta‡äes do ano; tendo nascido ap¢s o casamento de seu pai com M‚tis e antes do casamento com Hera. Criada no Olimpo, lar da nobreza divina, Pers‚fone foi sequestrada por seu
 ---------------------------------------
+Id: 11
+Nome: Simillo
+Dominio: Vim
+Biografia: Faz c¢digos que ningu‚m entende.
+---------------------------------------
+Id: 12
+Nome: Vinicius
+Dominio: ESAL
+Biografia: Troca de curso mais que a UFLA troca a grama.
+---------------------------------------
+Id: 13
+Nome: Rafael
+Dominio: Conta do pai
+Biografia: Vai no banco todos os dias sacar dinheiro.
+---------------------------------------
 Id: 33
 Nome: Xinagod
 Dominio: Rei do dredd
