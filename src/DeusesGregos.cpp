@@ -372,5 +372,6 @@ void DeusesGregos::exportToTxt() {
             txtFile << "---------------------------------------" << endl;
         }
         cout << "Deuses exportados com sucesso para o arquivo \"deuses.txt\"." << endl;
+        txtFile.close();
     }
 }

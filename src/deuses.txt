@@ -18,11 +18,6 @@ Nome: Pers‚fone
 Dominio: Deusa das ervas, flores, frutos e perfumes.
 Biografia: a deusa da agricultura e esta‡äes do ano; tendo nascido ap¢s o casamento de seu pai com M‚tis e antes do casamento com Hera. Criada no Olimpo, lar da nobreza divina, Pers‚fone foi sequestrada por seu
 ---------------------------------------
-Id: 323
-Nome: asd
-Dominio: asd
-Biografia: asd
----------------------------------------
 Id: 333
 Nome: C‚rbero
 Dominio: Possui 3 cabe‡as que podem cuspir fogo.
