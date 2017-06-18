@@ -1,0 +1,35 @@
+Id: 1
+Nome: Zeus
+Dominio: Deus do trovÆo.
+Biografia: Pai dos deuses e dos homens, exercia autoridade sobre os deuses ol¡mpicos na antiga regiÆo grega.
+---------------------------------------
+Id: 2
+Nome: Kr¢nos
+Dominio: Rei dos titÆs e o grande deus do tempo.
+Biografia: Pai de H‚stia, Dem‚ter, Hera, Hades, Poseidon e Zeus, Kr¢nos com medo de ser destronado, comeu todos os filhos, exceto Zeus.
+---------------------------------------
+Id: 3
+Nome: Poseidon
+Dominio: Deus supremo do mar.
+Biografia: IrmÆo de Hades e Zeus, Poseidon assumiu o estato de deus supremo do mar. Tamb‚m conhecido como deus dos terremotos. S¡mbolos associados sÆo o tridente e o golfinho.
+---------------------------------------
+Id: 4
+Nome: Pers‚fone
+Dominio: Deusa das ervas, flores, frutos e perfumes.
+Biografia: a deusa da agricultura e esta‡äes do ano; tendo nascido ap¢s o casamento de seu pai com M‚tis e antes do casamento com Hera. Criada no Olimpo, lar da nobreza divina, Pers‚fone foi sequestrada por seu
+---------------------------------------
+Id: 323
+Nome: asd
+Dominio: asd
+Biografia: asd
+---------------------------------------
+Id: 333
+Nome: C‚rbero
+Dominio: Possui 3 cabe‡as que podem cuspir fogo.
+Biografia: C‚rbero era um monstruoso cÆo de trˆs cabe‡as que guardava a entrada do mundo subterrƒneo dos mortos, deixando as almas entrarem, mas jamais sa¡rem e despeda‡ando os mortais que tentavam entrar.
+---------------------------------------
+Id: 666
+Nome: Hades
+Dominio: Deus do mundo inferior e dos mortos.
+Biografia: Como deus do mundo inferior, Hades raptou a deusa Pers‚fone, filha de Dem‚ter.
+---------------------------------------

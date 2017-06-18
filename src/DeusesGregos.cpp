@@ -40,6 +40,10 @@ inline bool DeusesGregos::_isOpen() {
 */
 
 void DeusesGregos::insertData(Deuses deus) {
+    if(deus.Id <= 0){
+        cout << "O id do deus tem que ser maior ou igual a 1." << endl;
+        return;
+    }
     if(_isOpen()) {
         fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
         Deuses deusAux;
@@ -348,4 +352,25 @@ void DeusesGregos::getGroupData() {
     << "*                    Vinicius Sezini                   *" << endl
     << "* Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
     << "********************************************************" << endl;
+}
+
+/**
+ * Método para exportar para TXT os deuses salvos.
+*/
+
+void DeusesGregos::exportToTxt() {
+    if(_isOpen()) {
+        ofstream txtFile("deuses.txt");
+        Deuses deusAux;
+        _arquivo.clear();
+        _arquivo.seekg(0, _arquivo.beg);
+        while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+            txtFile << "Id: "        << deusAux.Id        << endl;
+            txtFile << "Nome: "      << deusAux.Nome      << endl;
+            txtFile << "Dominio: "   << deusAux.Dominio   << endl;
+            txtFile << "Biografia: " << deusAux.Biografia << endl;
+            txtFile << "---------------------------------------" << endl;
+        }
+        cout << "Deuses exportados com sucesso para o arquivo \"deuses.txt\"." << endl;
+    }
 }

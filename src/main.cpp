@@ -1,5 +1,5 @@
 /**
- * GCC - 216, Estruturas de Dados
+ * GCC - 216, Estrutura de Dados
  * main.cpp
  * Propósito: Arquivo principal, acontece a interação com o usuário.
  * Tema: Deuses Gregos.
@@ -12,7 +12,8 @@
 
 int main(int argc, char *argv[]) {
     const char *NOME = argc >= 2 ? argv[1] : "deuses.bin";
-    const char *NOMEAUX = argc == 3 ? argv[2] : "deusesAux.bin";
+    const char *NOMEAUX = (argc >= 2 && strcmp(NOME, "deusesAux.bin") == 0) ? "deusesAux2.bin" : "deusesAux.bin";
+    cout << NOME << " " << NOMEAUX << endl;
     DeusesGregos deus(NOME, NOMEAUX);
 
     bool flag = true;
@@ -31,6 +32,8 @@ int main(int argc, char *argv[]) {
              << "Digite (v) para verificar se o arquivo esta aberto;"
              << endl
              << "Digite (a) para ver os dados do grupo;"
+             << endl
+             << "Digite (e) para exportar todos os deuses salvos para um arquivo .txt;"
              << endl
              << "Digite (q) para sair."
              << endl
@@ -110,6 +113,9 @@ int main(int argc, char *argv[]) {
                 break;
             case 'a':
                 deus.getGroupData();
+                break;
+            case 'e':
+                deus.exportToTxt();
                 break;
             case 'q':
             default:
