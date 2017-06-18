@@ -1,5 +1,5 @@
 /**
- * GCC - 216, Estrutura de Dados
+ * GCC - 216, Estruturas de Dados
  * DeusesGregos.cpp
  * Propósito: Arquivo para a definição dos metódos da classe 'DeusesGregos'.
  * Tema: Deuses Gregos.
@@ -98,18 +98,22 @@ void DeusesGregos::insertData(Deuses deus) {
 
 void DeusesGregos::getData() {
     if(_isOpen()) {
-        Deuses deus;
-        _arquivo.clear();
-        _arquivo.seekg(0, _arquivo.beg);
-        cout << endl;
-        while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
-            cout << "Id: "        << deus.Id        << endl;
-            cout << "Nome: "      << deus.Nome      << endl;
-            cout << "Dominio: "   << deus.Dominio   << endl;
-            cout << "Biografia: " << deus.Biografia << endl;
-            cout << "---------------------------------------" << endl;
+        if(_quantity > 0){
+            Deuses deus;
+            _arquivo.clear();
+            _arquivo.seekg(0, _arquivo.beg);
+            cout << endl;
+            while(_arquivo.read((char *) &deus, sizeof(Deuses))) {
+                cout << "Id: "        << deus.Id        << endl;
+                cout << "Nome: "      << deus.Nome      << endl;
+                cout << "Dominio: "   << deus.Dominio   << endl;
+                cout << "Biografia: " << deus.Biografia << endl;
+                cout << "---------------------------------------" << endl;
+            }
+            cout << endl;
+        } else {
+            cout << "Nao existe nenhum deus inserido." << endl;
         }
-        cout << endl;
     }
 }
 
@@ -120,48 +124,53 @@ void DeusesGregos::getData() {
 
 void DeusesGregos::getData(int id) {
     if(_isOpen()) {
-        if(id >= _firstId && id <= _lastId){
-            const int SIZE = sizeof(Deuses);
-            int positionLastEntry;
-            bool found = false;
-            
-            _arquivo.clear();
-            positionLastEntry = _arquivo.seekg(-SIZE, _arquivo.end).tellg();
-            Deuses deusAux;
-            
-            int number = positionLastEntry/SIZE + 1;
-
-            int first = 0,
-                last = number,
-                middle = number/2;
-            
-            while(first <= last && !found) {
-                middle = (first + last)/2;
+        if(_quantity > 0) {
+            if(id >= _firstId && id <= _lastId){
+                const int SIZE = sizeof(Deuses);
+                int positionLastEntry;
+                bool found = false;
                 
                 _arquivo.clear();
-                _arquivo.seekg(middle * SIZE);
-                _arquivo.read((char *) &deusAux, sizeof(Deuses));
+                positionLastEntry = _arquivo.seekg(-SIZE, _arquivo.end).tellg();
+                Deuses deusAux;
+                
+                int number = positionLastEntry/SIZE + 1;
 
-                if(deusAux.Id < id) {
-                    first = middle + 1;
-                } else if(deusAux.Id > id) {
-                    last = middle - 1;
-                } else {
-                    found = true;
+                int first = 0,
+                    last = number,
+                    middle = number/2;
+                
+                while(first <= last && !found) {
+                    middle = (first + last)/2;
+                    
+                    _arquivo.clear();
+                    _arquivo.seekg(middle * SIZE);
+                    _arquivo.read((char *) &deusAux, sizeof(Deuses));
+
+                    if(deusAux.Id < id) {
+                        first = middle + 1;
+                    } else if(deusAux.Id > id) {
+                        last = middle - 1;
+                    } else {
+                        found = true;
+                    }
                 }
-            }
-            if(found){
-                cout << "Id: "        << deusAux.Id        << endl;
-                cout << "Nome: "      << deusAux.Nome      << endl;
-                cout << "Dominio: "   << deusAux.Dominio   << endl;
-                cout << "Biografia: " << deusAux.Biografia << endl;
-                cout << "---------------------------------------" << endl;
-                return;
+                if(found){
+                    cout << "Id: "        << deusAux.Id        << endl;
+                    cout << "Nome: "      << deusAux.Nome      << endl;
+                    cout << "Dominio: "   << deusAux.Dominio   << endl;
+                    cout << "Biografia: " << deusAux.Biografia << endl;
+                    cout << "---------------------------------------" << endl;
+                    return;
+                } else {
+                    cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
+                }
             } else {
                 cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
             }
+        } else {
+            cout << "Nao existe nenhum deus inserido." << endl;
         }
-        cout << "Nenhum deus foi encontrado com o id " << id << "." << endl;
     }
 }
 
@@ -212,42 +221,47 @@ void DeusesGregos::checkIfIsOpen() {
 
 void DeusesGregos::deleteDeus(int id) {
     if(_isOpen()) {
-        fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
-        Deuses deusAux;
+        if(_quantity > 0){
+            fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+            Deuses deusAux;
 
-        bool exists = false;
+            bool exists = false;
 
-        _arquivo.clear();
-        _arquivo.seekg(0, _arquivo.beg);
+            _arquivo.clear();
+            _arquivo.seekg(0, _arquivo.beg);
 
-        arquivoAux.clear();
-        arquivoAux.seekg(0, arquivoAux.beg);
-
-         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-            if(deusAux.Id != id) {
-                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
-            } else
-                exists = true;
-        }
-        if(exists) {
-            _arquivo.close();
-            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
             arquivoAux.clear();
             arquivoAux.seekg(0, arquivoAux.beg);
-            while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
-                _arquivo.write((char *) &deusAux, sizeof(Deuses));
+
+            while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+                if(deusAux.Id != id) {
+                    arquivoAux.write((char *) &deusAux, sizeof(Deuses));
+                } else {
+                    exists = true;
+                }
             }
-            _arquivo.close();
-            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
-            --_quantity;
-            _lastId = getLast();
-            _firstId = getFirst();
-            cout << "Deus com o id " << id << " foi deletedo com sucesso." << endl;
+            if(exists) {
+                _arquivo.close();
+                _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+                arquivoAux.clear();
+                arquivoAux.seekg(0, arquivoAux.beg);
+                while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
+                    _arquivo.write((char *) &deusAux, sizeof(Deuses));
+                }
+                _arquivo.close();
+                _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+                --_quantity;
+                _lastId = getLast();
+                _firstId = getFirst();
+                cout << "Deus com o id " << id << " foi deletedo com sucesso." << endl;
+            } else {
+                cout << "Nao existe deus com o id " << id << " no arquivo." << endl;
+            }
+            arquivoAux.close();
+            remove(_fileNameAux);
         } else {
-            cout << "Nao existe deus com o id " << id << " no arquivo." << endl;
+            cout << "Nao existe nenhum deus inserido." << endl;
         }
-        arquivoAux.close();
-        remove(_fileNameAux);
     }
 }
 
@@ -258,44 +272,47 @@ void DeusesGregos::deleteDeus(int id) {
 
 void DeusesGregos::deleteDeus(char nome[50]) {
     if(_isOpen()) {
-        fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
-        Deuses deusAux;
+        if(_quantity > 0){
+            fstream arquivoAux(_fileNameAux, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+            Deuses deusAux;
 
-        bool exists = false;
+            bool exists = false;
 
-        _arquivo.clear();
-        _arquivo.seekg(0, _arquivo.beg);
+            _arquivo.clear();
+            _arquivo.seekg(0, _arquivo.beg);
 
-        arquivoAux.clear();
-        arquivoAux.seekg(0, arquivoAux.beg);
-
-         while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
-            
-            if(strcmp(deusAux.Nome, nome) != 0 || exists) {
-                arquivoAux.write((char *) &deusAux, sizeof(Deuses));
-            } else {
-                exists = true;
-            }
-        }
-        if(exists) {
-            _arquivo.close();
-            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
             arquivoAux.clear();
             arquivoAux.seekg(0, arquivoAux.beg);
-            while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
-                _arquivo.write((char *) &deusAux, sizeof(Deuses));
+
+            while(_arquivo.read((char *) &deusAux, sizeof(Deuses))) {
+                if(strcmp(deusAux.Nome, nome) != 0 || exists) {
+                    arquivoAux.write((char *) &deusAux, sizeof(Deuses));
+                } else {
+                    exists = true;
+                }
             }
-            _arquivo.close();
-            _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
-            --_quantity;
-            _lastId = getLast();
-            _firstId = getFirst();
-            cout << "Deus com o nome " << nome << " foi deletedo com sucesso." << endl;
+            if(exists) {
+                _arquivo.close();
+                _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::trunc);
+                arquivoAux.clear();
+                arquivoAux.seekg(0, arquivoAux.beg);
+                while(arquivoAux.read((char *) &deusAux, sizeof(Deuses))) {
+                    _arquivo.write((char *) &deusAux, sizeof(Deuses));
+                }
+                _arquivo.close();
+                _arquivo.open(_fileName, ios_base::in | ios_base::out | ios_base::binary | ios_base::app);
+                --_quantity;
+                _lastId = getLast();
+                _firstId = getFirst();
+                cout << "Deus com o nome " << nome << " foi deletedo com sucesso." << endl;
+            } else {
+                cout << "Nao existe deus com o nome " << nome << " no arquivo." << endl;
+            }
+            arquivoAux.close();
+            remove(_fileNameAux);
         } else {
-            cout << "Nao existe deus com o nome " << nome << " no arquivo." << endl;
+            cout << "Nao existe nenhum deus inserido." << endl;
         }
-        arquivoAux.close();
-        remove(_fileNameAux);
     }
 }
 
@@ -323,12 +340,12 @@ int DeusesGregos::getQuantity() {
 
 void DeusesGregos::getGroupData() {
     cout 
-    << "*******************************************************" << endl
-    << "*      Trabalho de Estrutura de Dados - GCC 216       *" << endl
-    << "*      Tema: Deuses Gregos                            *" << endl
-    << "*      Integrantes: Simillo Nakai                     *" << endl
-    << "*                   Rafael Resende                    *" << endl
-    << "*                   Vinicius Sezini                   *" << endl
-    << "*Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
-    << "*******************************************************" << endl;
+    << "********************************************************" << endl
+    << "*       Trabalho de Estrutura de Dados - GCC 216       *" << endl
+    << "*       Tema: Deuses Gregos                            *" << endl
+    << "*       Integrantes: Simillo Nakai                     *" << endl
+    << "*                    Rafael Resende                    *" << endl
+    << "*                    Vinicius Sezini                   *" << endl
+    << "* Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
+    << "********************************************************" << endl;
 }

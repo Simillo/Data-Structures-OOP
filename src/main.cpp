@@ -1,5 +1,5 @@
 /**
- * GCC - 216, Estrutura de Dados
+ * GCC - 216, Estruturas de Dados
  * main.cpp
  * Propósito: Arquivo principal, acontece a interação com o usuário.
  * Tema: Deuses Gregos.

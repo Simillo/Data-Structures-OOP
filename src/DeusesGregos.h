@@ -1,5 +1,5 @@
 /**
- * GCC - 216, Estrutura de Dados
+ * GCC - 216, Estruturas de Dados
  * DeusesGregos.h
  * Propósito: Header de declaração da classe 'DeusesGregos' e o struct 'Deuses'.
  * Tema: Deuses Gregos.
