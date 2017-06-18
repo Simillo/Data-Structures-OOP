@@ -13,7 +13,6 @@
 int main(int argc, char *argv[]) {
     const char *NOME = argc >= 2 ? argv[1] : "deuses.bin";
     const char *NOMEAUX = (argc >= 2 && strcmp(NOME, "deusesAux.bin") == 0) ? "deusesAux2.bin" : "deusesAux.bin";
-    cout << NOME << " " << NOMEAUX << endl;
     DeusesGregos deus(NOME, NOMEAUX);
 
     bool flag = true;
