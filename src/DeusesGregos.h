@@ -47,8 +47,8 @@ class DeusesGregos {
         void deleteDeus(int id);
         void deleteDeus(char nome[50]);
         int getQuantity();
-        void getGroupData();
         void exportToTxt();
+        void getGroupData();
 };
 
 #endif

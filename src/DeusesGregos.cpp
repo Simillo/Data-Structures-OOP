@@ -339,22 +339,6 @@ int DeusesGregos::getQuantity() {
 }
 
 /**
- * Método para imprimir os dados do grupo.
-*/
-
-void DeusesGregos::getGroupData() {
-    cout 
-    << "********************************************************" << endl
-    << "*       Trabalho de Estrutura de Dados - GCC 216       *" << endl
-    << "*       Tema: Deuses Gregos                            *" << endl
-    << "*       Integrantes: Simillo Nakai                     *" << endl
-    << "*                    Rafael Resende                    *" << endl
-    << "*                    Vinicius Sezini                   *" << endl
-    << "* Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
-    << "********************************************************" << endl;
-}
-
-/**
  * Método para exportar para TXT os deuses salvos.
 */
 
@@ -374,4 +358,20 @@ void DeusesGregos::exportToTxt() {
         cout << "Deuses exportados com sucesso para o arquivo \"deuses.txt\"." << endl;
         txtFile.close();
     }
+}
+
+/**
+ * Método para imprimir os dados do grupo.
+*/
+
+void DeusesGregos::getGroupData() {
+    cout 
+    << "*********************************************************" << endl
+    << "*       Trabalho de Estruturas de Dados - GCC 216       *" << endl
+    << "*       Tema: Deuses Gregos                             *" << endl
+    << "*       Integrantes: Simillo Nakai                      *" << endl
+    << "*                    Rafael Resende                     *" << endl
+    << "*                    Vinicius Sezini                    *" << endl
+    << "*  Repositorio no github: github.com/Simillo/TrabalhoED *" << endl
+    << "*********************************************************" << endl;
 }
